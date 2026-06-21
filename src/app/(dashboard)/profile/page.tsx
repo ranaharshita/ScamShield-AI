@@ -2,20 +2,58 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { User, Mail, Calendar, Save, Loader2 } from "lucide-react";
+import { User, Mail, Calendar, Save, Loader2, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { api } from "@/lib/api";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+};
+const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.07 } } };
+
+function Field({
+  label, icon: Icon, value, onChange, disabled, type = "text",
+}: {
+  label: string;
+  icon: React.ElementType;
+  value: string;
+  onChange?: (v: string) => void;
+  disabled?: boolean;
+  type?: string;
+}) {
+  return (
+    <div>
+      <label className="mb-1.5 block text-xs font-medium text-[var(--text-muted)]">{label}</label>
+      <div className="relative">
+        <Icon className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-muted)]" strokeWidth={1.75} />
+        <input
+          type={type}
+          value={value}
+          onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+          disabled={disabled}
+          suppressHydrationWarning
+          className={`w-full rounded-xl border border-[var(--border)] bg-[var(--bg)] py-2.5 pl-10 pr-4 text-sm text-[var(--text-primary)] outline-none transition-colors ${
+            disabled
+              ? "cursor-not-allowed opacity-60"
+              : "focus:border-[var(--accent)]"
+          }`}
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function ProfilePage() {
   const { user } = useAuth();
   const [fullName, setFullName] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [loading,  setLoading]  = useState(false);
+  const [saved,    setSaved]    = useState(false);
 
   useEffect(() => {
-    api.getProfile().then((p: any) => {
-      setFullName(p.full_name || "");
-    }).catch(() => {});
+    api.getProfile()
+      .then((p: any) => setFullName(p.full_name || ""))
+      .catch(() => {});
   }, []);
 
   const handleSave = async () => {
@@ -25,79 +63,74 @@ export default function ProfilePage() {
       await api.updateProfile({ full_name: fullName });
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
-    } catch {} finally {
-      setLoading(false);
-    }
+    } catch {}
+    finally { setLoading(false); }
   };
 
-  return (
-    <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="max-w-2xl space-y-6">
-      <div>
-        <h1 className="font-display text-3xl font-bold text-paper">Profile</h1>
-        <p className="mt-1 text-text-muted">Manage your account information</p>
-      </div>
+  const initials = user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || "U";
+  const displayName = user?.user_metadata?.full_name || fullName || "User";
 
-      <div className="rounded-2xl border border-wire bg-ink-raised p-6 space-y-6">
-        {/* Avatar */}
-        <div className="flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-signal-dim text-2xl font-bold text-signal">
-            {user?.user_metadata?.full_name?.[0] || user?.email?.[0]?.toUpperCase() || "U"}
-          </div>
-          <div>
-            <p className="font-display text-lg font-medium text-paper">
-              {user?.user_metadata?.full_name || "User"}
-            </p>
-            <p className="text-sm text-text-muted">{user?.email}</p>
+  return (
+    <motion.div initial="hidden" animate="visible" variants={stagger} className="max-w-md space-y-6">
+      <motion.div variants={fadeUp}>
+        <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight">Profile</h1>
+        <p className="mt-1 text-sm text-[var(--text-muted)]">Manage your account information</p>
+      </motion.div>
+
+      <motion.div variants={fadeUp} className="rounded-2xl border border-[var(--border)] bg-[var(--bg-raised)] overflow-hidden">
+        {/* Avatar banner */}
+        <div className="h-1 w-full bg-gradient-to-r from-[var(--accent)] via-[#6366f1] to-transparent" />
+        <div className="p-6">
+          <div className="flex items-center gap-4">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent-dim)] text-xl font-bold text-[var(--accent)]">
+              {initials}
+            </div>
+            <div>
+              <p className="font-semibold text-[var(--text-primary)]">{displayName}</p>
+              <p className="text-sm text-[var(--text-muted)]">{user?.email}</p>
+            </div>
           </div>
         </div>
 
-        <div className="h-px bg-wire" />
+        <div className="mx-6 h-px bg-[var(--border)]" />
 
         {/* Fields */}
-        <div className="space-y-4">
-          <div>
-            <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-text-muted">Full Name</label>
-            <div className="relative">
-              <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-dim" />
-              <input
-                type="text" value={fullName} onChange={(e) => setFullName(e.target.value)}
-                className="w-full rounded-xl border border-wire bg-ink py-3 pl-10 pr-4 text-sm text-paper outline-none focus:border-signal"
-              />
-            </div>
-          </div>
-          <div>
-            <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-text-muted">Email</label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-dim" />
-              <input
-                type="email" value={user?.email || ""} disabled
-                className="w-full rounded-xl border border-wire bg-ink py-3 pl-10 pr-4 text-sm text-text-dim outline-none cursor-not-allowed"
-              />
-            </div>
-          </div>
-          <div>
-            <label className="mb-1.5 block font-mono text-xs uppercase tracking-wider text-text-muted">Member Since</label>
-            <div className="relative">
-              <Calendar className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-dim" />
-              <input
-                type="text"
-                value={user?.created_at ? new Date(user.created_at).toLocaleDateString() : ""}
-                disabled
-                suppressHydrationWarning
-                className="w-full rounded-xl border border-wire bg-ink-raised py-2.5 pl-10 pr-4 text-sm text-text-muted opacity-70"
-              />
-            </div>
+        <div className="p-6 space-y-4">
+          <Field
+            label="Full Name"
+            icon={User}
+            value={fullName}
+            onChange={setFullName}
+          />
+          <Field
+            label="Email Address"
+            icon={Mail}
+            value={user?.email || ""}
+            disabled
+            type="email"
+          />
+          <Field
+            label="Member Since"
+            icon={Calendar}
+            value={user?.created_at ? new Date(user.created_at).toLocaleDateString() : ""}
+            disabled
+          />
+
+          <div className="pt-2">
+            <button
+              onClick={handleSave}
+              disabled={loading}
+              className="flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[var(--accent-glow)] transition-all hover:opacity-90 disabled:opacity-50"
+            >
+              {loading
+                ? <><Loader2 className="h-4 w-4 animate-spin" /> Saving...</>
+                : saved
+                ? <><CheckCircle2 className="h-4 w-4" /> Saved!</>
+                : <><Save className="h-4 w-4" /> Save Changes</>}
+            </button>
           </div>
         </div>
-
-        <button
-          onClick={handleSave} disabled={loading}
-          className="flex items-center gap-2 rounded-xl bg-signal px-5 py-2.5 text-sm font-semibold text-ink transition-all hover:brightness-110 disabled:opacity-50"
-        >
-          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-          {saved ? "Saved!" : "Save Changes"}
-        </button>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

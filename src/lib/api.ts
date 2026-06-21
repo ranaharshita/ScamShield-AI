@@ -1,4 +1,4 @@
-/**
+﻿/**
  * API client — wraps fetch calls to the Next.js App Router API.
  * Automatically attaches the Supabase JWT from the current session.
  */
@@ -66,7 +66,7 @@ async function apiUpload<T>(path: string, formData: FormData): Promise<T> {
   return res.json();
 }
 
-// ─── Typed API Functions ────────────────────────────────────────────────────
+// --- Typed API Functions ----------------------------------------------------
 
 export const api = {
   // Auth
