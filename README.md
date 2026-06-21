@@ -1,6 +1,4 @@
-# ScamShield AI — Frontend
-
-Next.js (App Router) + Tailwind CSS frontend for ScamShield AI.
+# ScamShield AI 
 
 ## Run locally
 
@@ -9,15 +7,8 @@ npm install
 npm run dev
 ```
 
-Visit http://localhost:3000
+Visit [ScamShield](https://scam-shield-ai-eight.vercel.app/)
 
-## Environment variables
-
-Copy `.env.example` to `.env.local` and set:
-
-```
-NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
-```
 
 ## Structure
 
