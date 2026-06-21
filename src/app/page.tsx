@@ -490,7 +490,7 @@ function TeamSection() {
           <motion.div variants={fadeUp} className="mb-14 text-center">
             <p className="text-sm font-medium text-[var(--text-muted)]">Built with ❤️ by</p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-[var(--text-primary)]">
-              Team ScamShield AI
+              Team AscendX
             </h2>
           </motion.div>
 
@@ -578,7 +578,7 @@ function Footer() {
           <span className="text-sm font-medium text-[var(--text-muted)]">ScamShield AI</span>
         </div>
         <p className="text-xs text-[var(--text-muted)]">
-          © 2025 ScamShield AI — Know Before You Trust
+          © 2026 ScamShield AI — Know Before You Trust
         </p>
         <div className="flex items-center gap-4 text-xs text-[var(--text-muted)]">
           <Link href="/login" className="hover:text-[var(--text-primary)] transition-colors">Sign In</Link>
