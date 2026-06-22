@@ -351,6 +351,17 @@ ScamShield AI helps detect:
 
 ---
 
+## Supported Platforms
+
+- WhatsApp
+- Telegram
+- Instagram
+- Discord
+- Email
+- SMS
+
+---
+
 # 📜 License
 
 This project is licensed under the MIT License.
