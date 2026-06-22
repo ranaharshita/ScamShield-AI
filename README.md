@@ -315,11 +315,10 @@ Our mission is to help people:
 
 ScamShield AI helps detect:
 
-- Phishing Scams
-- UPI Fraud
-- Job Scams
-- Investment Scams
-- Romance Scams
+- Phishing Scams (fake links & login pages)
+- UPI Fraud (payment request scams)
+- Job Scams (fake recruitment offers)
+- Investment Scams (high-return fraud schemes)
 
 ---
 
