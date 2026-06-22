@@ -323,6 +323,16 @@ ScamShield AI helps detect:
 
 ---
 
+## Analysis Workflow
+
+1. User submits content
+2. Rule engine analyzes patterns
+3. AI performs contextual analysis
+4. Risk score is generated
+5. Recommendations are displayed
+
+---
+
 # 📜 License
 
 This project is licensed under the MIT License.
