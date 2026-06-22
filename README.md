@@ -311,7 +311,7 @@ Our mission is to help people:
 
 ---
 
-## Threat Categories
+## 🚨 Threat Categories
 
 ScamShield AI helps detect:
 
@@ -323,7 +323,7 @@ ScamShield AI helps detect:
 
 ---
 
-## Analysis Workflow
+## 🔄 Analysis Workflow
 
 1. User submits content
 2. Rule engine analyzes patterns
@@ -333,7 +333,7 @@ ScamShield AI helps detect:
 
 ---
 
-## Contribution Guidelines
+## 🤝 Contribution Guidelines
 
 1. Fork the repository
 2. Create a feature branch
@@ -342,7 +342,7 @@ ScamShield AI helps detect:
 
 ---
 
-## Security Awareness Tips
+## 🔐 Security Awareness Tips
 
 - Never share OTPs
 - Verify links before clicking
@@ -351,7 +351,7 @@ ScamShield AI helps detect:
 
 ---
 
-## Supported Platforms
+## 📱 Supported Platforms
 
 - WhatsApp
 - Telegram
@@ -362,7 +362,7 @@ ScamShield AI helps detect:
 
 ---
 
-## Risk Levels
+## ⚠️ Risk Levels
 
 - Low Risk
 - Medium Risk
@@ -371,7 +371,7 @@ ScamShield AI helps detect:
 
 ---
 
-## Future AI Improvements
+## 🚀 Future AI Improvements
 
 - Better scam classification
 - Faster analysis
