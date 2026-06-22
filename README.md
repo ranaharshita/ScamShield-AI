@@ -371,6 +371,15 @@ ScamShield AI helps detect:
 
 ---
 
+## Future AI Improvements
+
+- Better scam classification
+- Faster analysis
+- Multi-language support
+- Advanced OCR capabilities
+
+---
+
 # 📜 License
 
 This project is licensed under the MIT License.
