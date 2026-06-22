@@ -347,6 +347,7 @@ ScamShield AI helps detect:
 - Verify links before clicking
 - Avoid unknown attachments
 - Report suspicious activity
+- Double-check sender identity
 
 ---
 
@@ -363,16 +364,16 @@ ScamShield AI helps detect:
 
 ## ⚠️ Risk Levels
 
-- Low Risk
-- Medium Risk
-- High Risk
-- Critical Risk
+- Low Risk → Safe or normal content
+- Medium Risk → Suspicious patterns detected
+- High Risk → Likely scam
+- Critical Risk → Confirmed malicious content
 
 ---
 
 ## 🚀 Future AI Improvements
 
-- Better scam classification
+- Better scam classification model (LLM fine-tuning)
 - Faster analysis
 - Multi-language support
 - Advanced OCR capabilities
